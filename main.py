@@ -1,3 +1,6 @@
+# Impoer the Union class from typing
+from typing import Union
+
 # Import the FastAPI class
 from fastapi import FastAPI
 
@@ -30,7 +33,7 @@ with open('settings.json') as json_file:
     
     # Create the airbnbs endpoint
     @app.get("/airbnbs/{id}")
-    def read_airbnbs(id: int, visited: str):
+    def read_airbnbs(id: int, visited: Union[str, None] = None):
         foundAirbnb = mycol.find_one({"id": id})
         print(foundAirbnb)
         if foundAirbnb:
