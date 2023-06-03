@@ -30,7 +30,7 @@ with open('settings.json') as json_file:
     
     # Create the airbnbs endpoint
     @app.get("/airbnbs/{id}")
-    def read_airbnbs(id: int):
+    def read_airbnbs(id: int, visited: str):
         foundAirbnb = mycol.find_one({"id": id})
         print(foundAirbnb)
         if foundAirbnb:
@@ -42,11 +42,14 @@ with open('settings.json') as json_file:
             }
         else:
             neighbors = settings["neighbors"]
-            visitedNeighbors = []
+            visitedNeighbors = visited.split(',') if visited else []
             for neighbor in neighbors:
                 if neighbor["id"] not in visitedNeighbors:
                     visitedNeighbors.append(neighbor["id"])
-                    response = requests.get(f"http://localhost:{neighbor['port']}/airbnbs/{id}").json()
+                    try:
+                        response = requests.get(f"http://localhost:{neighbor['port']}/airbnbs/{id}").json()
+                    except:
+                        print("Server not found")
                     if response["airbnb"]:
                         return response["airbnb"]
             return {"error": "Airbnb not found"}
