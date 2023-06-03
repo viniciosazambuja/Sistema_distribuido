@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "Cozy Cottage Retreat" },
+  { "id": 2, "name": "Modern City Apartment" },
+  { "id": 3, "name": "Seaside Villa Paradise" },
+  { "id": 4, "name": "Charming Countryside Cabin" },
+  { "id": 5, "name": "Urban Loft Oasis" },
+  { "id": 6, "name": "Beachfront Bungalow" },
+  { "id": 7, "name": "Serenity Mountain Retreat" },
+  { "id": 8, "name": "Stylish Downtown Studio" },
+  { "id": 9, "name": "Tranquil Riverfront House" },
+  { "id": 10, "name": "Spacious Lakeside Chalet" }
+]

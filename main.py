@@ -35,7 +35,6 @@ with open('settings.json') as json_file:
     @app.get("/airbnbs/{id}")
     def read_airbnbs(id: int, visited: Union[str, None] = None):
         foundAirbnb = mycol.find_one({"id": id})
-        print(foundAirbnb)
         if foundAirbnb:
             return {
                 "airbnb": {
@@ -44,14 +43,19 @@ with open('settings.json') as json_file:
                 },
             }
         else:
+            print("else")
             neighbors = settings["neighbors"]
             visitedNeighbors = visited.split(',') if visited else []
+            print(visitedNeighbors)
             for neighbor in neighbors:
                 if neighbor["id"] not in visitedNeighbors:
                     visitedNeighbors.append(neighbor["id"])
+                    visitedAsString = ','.join(visitedNeighbors)
+                    print("Visited: ", visitedAsString)
                     try:
-                        response = requests.get(f"http://localhost:{neighbor['port']}/airbnbs/{id}").json()
-                    except:
+                        query = f"?visited={visitedAsString}" if len(visitedAsString) > 0 else ''
+                        response = requests.get(f"http://localhost:{neighbor['port']}/airbnbs/{id}{query}" ).json()
+                    except :
                         print("Server not found")
                     if response["airbnb"]:
                         return response["airbnb"]
