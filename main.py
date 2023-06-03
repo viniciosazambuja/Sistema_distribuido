@@ -50,3 +50,4 @@ with open('settings.json') as json_file:
                     if response["airbnb"]:
                         return response["airbnb"]
             return {"error": "Airbnb not found"}
+        
