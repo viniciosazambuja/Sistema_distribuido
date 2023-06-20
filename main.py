@@ -19,7 +19,7 @@ with open('settings.json') as json_file:
     # Load the neighboards.json file
     settings = json.load(json_file)
 
-    myclient = MongoClient(f"mongodb://{settings['database']['host']}:{settings['database']['port']}/")
+    myclient = MongoClient(settings['database']['string'])
     mydb = myclient[settings['database']['name']]
     mycol = mydb["airbnbs"]
 
