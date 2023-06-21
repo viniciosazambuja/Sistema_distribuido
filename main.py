@@ -43,15 +43,12 @@ with open('settings.json') as json_file:
                 },
             }
         else:
-            print("else")
             neighbors = settings["neighbors"]
             visitedNeighbors = visited.split(',') if visited else []
-            print(visitedNeighbors)
             for neighbor in neighbors:
                 if neighbor["id"] not in visitedNeighbors:
-                    visitedNeighbors.append(neighbor["id"])
+                    visitedNeighbors.append(str(neighbor["id"]))
                     visitedAsString = ','.join(visitedNeighbors)
-                    print("Visited: ", visitedAsString)
                     try:
                         query = f"?visited={visitedAsString}" if len(visitedAsString) > 0 else ''
                         response = requests.get(f"http://localhost:{neighbor['port']}/airbnbs/{id}{query}" ).json()
