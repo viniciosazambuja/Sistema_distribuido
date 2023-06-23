@@ -1,0 +1,19 @@
+{
+    "id": 1,
+    "port": 8001,
+    "database": {
+        "string": "mongodb://localhost:27017/",
+        "name": "node1",
+        "collection": "airbnbs"
+    },
+    "neighbors": [
+        {
+            "id": 2,
+            "port": 8002
+        },
+        {
+            "id": 3,
+            "port": 8003
+        }
+    ]
+}
